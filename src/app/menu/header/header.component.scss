@@ -1,0 +1,21 @@
+.center {
+    display: flex;
+    align-items: center;
+}
+
+.margin-right-20 {
+    margin-right: 20px;
+}
+
+.blinking-shadow {
+    animation: blinking-shadow 1s ease-in-out 0s infinite alternate;
+}
+
+@keyframes blinking-shadow {
+    from {
+        box-shadow: 0 0 0 0 black;
+    }
+    to {
+        box-shadow: 0 0 3px 3px black;
+    }
+}

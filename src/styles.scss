@@ -1,1 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+a:visited {
+    color: black;
+}
+
+.padding {
+    padding: 10px;
+}
+
+tr {
+    width: 100%;
+}
+
+td {
+    border: 1px solid blue;
+    padding: 20px 15px;
+    width: 300px;
+}
