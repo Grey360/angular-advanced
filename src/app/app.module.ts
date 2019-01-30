@@ -11,6 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { CustomerComponent } from './menu/customers/customer/customer.component';
 import { CardComponent } from './menu/card/card.component';
+import { TabComponent } from './tab/tab.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -20,12 +22,14 @@ import { CardComponent } from './menu/card/card.component';
     FooterComponent,
     CustomersComponent,
     CustomerComponent,
-    CardComponent
+    CardComponent,
+    TabComponent
   ],
   imports: [
     CommonModule,
     HttpClientModule,
     BrowserModule,
+    SharedModule,
     AppRoutingModule
   ],
   providers: [],
