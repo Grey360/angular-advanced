@@ -1,19 +1,25 @@
-
-<h2 class="title">{{ 'edit' | translate }} {{ customer.name }}</h2>
-<form (ngSubmit)="onModify()" [formGroup]="customerGroup">
-  <div class="form-group">
-    <label for="name">{{ 'name' | translate}}</label>
-    <input
-    [(ngModel)]="customer.name" type="text" class="form-control" id="name" placeholder="Name" formControlName="name">
-  </div>
-  <p *ngIf="nameCtrl.dirty && nameCtrl.hasError('notContaining')">Name not containing A</p>
-  <div class="form-group">
-    <label for="address">{{ 'address' | translate }}</label>
-    <input [(ngModel)]="customer.address.street" type="text" class="form-control" id="address" placeholder="Address" formControlName="address">
-  </div>
-  <div class="form-group">
-    <label for="city">{{ 'city' | translate }}</label>
-    <input [(ngModel)]="customer.address.city" type="text" class="form-control" id="city" placeholder="City" formControlName="city">
-  </div>
-  <button type="submit" class="btn btn-primary">{{ 'modify' | translate }}</button>
-</form>
+<button (click)="navigate('todo')">Todo</button>
+<button (click)="navigate('comments')">Comments</button>
+<ng-container *ngIf="customer | async as customerModel">
+  <h2 class="title">{{ 'edit' | translate }} {{ customerModel.name }}</h2>
+  <form (ngSubmit)="onModify(customerModel.id, customerModel)" [formGroup]="customerGroup">
+    <div class="form-group">
+      <label for="name">{{ 'name' | translate}}</label>
+      <input [(ngModel)]="customerModel.name" type="text" class="form-control" id="name" placeholder="Name"
+        formControlName="name">
+    </div>
+    <p *ngIf="nameCtrl.dirty && nameCtrl.hasError('notContaining')">Name not containing A</p>
+    <div class="form-group">
+      <label for="address">{{ 'address' | translate }}</label>
+      <input [(ngModel)]="customerModel.address.street" type="text" class="form-control" id="address" placeholder="Address"
+        formControlName="address">
+    </div>
+    <div class="form-group">
+      <label for="city">{{ 'city' | translate }}</label>
+      <input [(ngModel)]="customerModel.address.city" type="text" class="form-control" id="city" placeholder="City"
+        formControlName="city">
+    </div>
+    <button type="submit" class="btn btn-primary">{{ 'modify' | translate }}</button>
+  </form>
+  <router-outlet></router-outlet>
+</ng-container>

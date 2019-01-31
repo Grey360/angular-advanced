@@ -1,8 +1,8 @@
-<div>
+<div *ngIf="customersList | async as customers">
   <div class="d-flex justify-content-between align-items-around flex-wrap">
     <app-customer
     class="mt-2 mb-2"
-    *ngFor="let customer of customersList"
+    *ngFor="let customer of customers"
     [customer]="customer"
     (click)="customerSelected(customer)"
     [ngClass]="{ 'selected': customer.selected }"></app-customer>

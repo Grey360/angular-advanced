@@ -1,17 +1,19 @@
+import { Observable } from 'rxjs/internal/Observable';
 import { CustomerService } from './../../shared/customer/customer.service';
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { Customer } from '../../shared/Customer';
-import { Address } from '../../shared/Address';
 import { CustomerComponent } from './customer/customer.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-customers',
   templateUrl: './customers.component.html',
   styleUrls: ['./customers.component.scss']
 })
-export class CustomersComponent implements OnInit {
+export class CustomersComponent implements OnInit, OnDestroy {
 
-  customersList: Customer[];
+  sub: Subscription;
+  customersList: Observable<Customer[]>;
   @ViewChild(CustomerComponent) customer: CustomerComponent;
 
   constructor(
@@ -20,39 +22,23 @@ export class CustomersComponent implements OnInit {
 
   ngOnInit() {
     this.loadCustomers();
+    this.testSubscription();
+  }
+
+  ngOnDestroy() {
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
+  }
+
+  testSubscription() {
+    this.sub = this.customerService.getObs().subscribe(test => {
+      console.log(test);
+    });
   }
 
   loadCustomers() {
-    this.customerService.getAllCustomers().subscribe(
-      customers => {
-        this.customersList = customers.body;
-        if (this.customersList[0]) {
-          this.customersList[0].isVip = true;
-        }
-
-        if (this.customersList[3]) {
-          this.customersList[3].isVip = true;
-        }
-        const address = new Address(
-          '240, rue Montels Eglise',
-          'Suite royale',
-          'MONTPELLIER',
-          '34070'
-        );
-        const me = new Customer(
-          'Gailor PETEMOYA',
-          address,
-          'Montpellier',
-          '34070',
-          true, 25,
-          new Date(), 'Thanos',
-          'gailor.petemoya@capgemini',
-          '+337 83 69 82 86',
-          'gailor.co.uk'
-        );
-        this.customersList.push(me);
-      }
-    );
+    this.customersList = this.customerService.getAllCustomers();
   }
 
   customerSelected(customer: Customer) {

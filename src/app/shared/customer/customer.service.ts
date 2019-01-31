@@ -1,8 +1,9 @@
 import { Injectable, Inject, Optional } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Customer } from '../Customer';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpHandler } from '@angular/common/http';
 import { CUSTOMERS_URL } from '../TOKENS';
+import { Subscriber } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,8 @@ export class CustomerService {
     private http: HttpClient
   ) { }
 
-  getById(id: number): Observable<HttpResponse<Customer>> {
-    return this.http.get<Customer>(this.url + '/' + id, { observe: 'response' });
+  getById(id: number): Observable<Customer> {
+    return this.http.get<Customer>(this.url + '/' + id);
   }
 
   put(id: number, customer: Customer): Observable<HttpResponse<Customer>> {
@@ -26,7 +27,14 @@ export class CustomerService {
     return this.http.post<Customer>(this.url, customer, { observe: 'response' });
   }
 
-  getAllCustomers(): Observable<HttpResponse<Array<Customer>>> {
-    return this.http.get<Array<Customer>>(this.url, { observe: 'response' });
+  getAllCustomers(): Observable<Array<Customer>> {
+    return this.http.get<Array<Customer>>(this.url);
+  }
+
+  getObs(): Observable<string> {
+    return Observable.create((observer: Subscriber<string>) => {
+      const interval = setInterval(() => observer.next('Gailor is GOD'), 2000);
+      return () => clearInterval(interval);
+    });
   }
 }

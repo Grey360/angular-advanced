@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './menu/header/header.component';
-import { OrdersComponent } from './menu/orders/orders.component';
 import { FooterComponent } from './menu/footer/footer.component';
 import { CustomersComponent } from './menu/customers/customers.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -17,18 +16,21 @@ import { SharedModule } from './shared/shared.module';
 import { EditComponent } from './edit/edit.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { MultiTranslateHttpLoader } from 'ngx-translate-multi-http-loader';
+import { TodoComponent } from './todo/todo.component';
+import { CommentsComponent } from './comments/comments.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    OrdersComponent,
     FooterComponent,
     CustomersComponent,
     CustomerComponent,
     CardComponent,
     TabComponent,
-    EditComponent
+    EditComponent,
+    TodoComponent,
+    CommentsComponent
   ],
   imports: [
     CommonModule,

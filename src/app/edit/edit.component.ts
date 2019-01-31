@@ -2,9 +2,10 @@ import { CustomerEditModel } from './CustomerEdit.model';
 import { Customer } from './../shared/Customer';
 
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CustomerService } from '../shared/customer/customer.service';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'app-edit',
@@ -13,7 +14,9 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 })
 export class EditComponent implements OnInit {
 
-  customer: Customer;
+  id: number;
+  customerModel: Customer;
+  customer: Observable<Customer>;
   nameCtrl: FormControl;
   addressCtrl: FormControl;
   cityCtrl: FormControl;
@@ -22,7 +25,8 @@ export class EditComponent implements OnInit {
 
   constructor(
     private customerService: CustomerService,
-    private router: ActivatedRoute
+    private router: ActivatedRoute,
+    private route: Router
   ) { }
 
   ngOnInit() {
@@ -37,10 +41,7 @@ export class EditComponent implements OnInit {
   }
 
   loadCustomer(id: number) {
-    this.customerService.getById(id).subscribe(customer => {
-      console.log(customer);
-      this.customer = customer.body;
-    });
+    this.customer = this.customerService.getById(id);
   }
 
   private initForm() {
@@ -59,11 +60,14 @@ export class EditComponent implements OnInit {
     });
   }
 
-  onModify() {
-    this.customerService.put(this.customer.id, this.customer).subscribe(customer => {
+  onModify(customer_id: number, customer_mod: Customer) {
+    this.customerService.put(customer_id, customer_mod).subscribe(customer => {
       const response = customer.body;
-      console.log('Modified', response);
     });
+  }
+
+  navigate(uri: string) {
+    this.route.navigate([uri], { relativeTo: this.router });
   }
 
 }
