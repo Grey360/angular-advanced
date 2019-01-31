@@ -1,7 +1,12 @@
 <div class="menu center">
-  <h1 class="margin-right-20 blinking-shadow padding">CRM</h1>
+  <h1 class="margin-right-20 blinking-shadow padding">{{ 'customer.CRM' | translate }}</h1>
   <app-tabs>
-    <app-tab link="/" title="Customers"></app-tab>
-    <app-tab link="/orders" title="Orders"></app-tab>
+    <app-tab link="/" title="{{'customer.customers' | translate}}"></app-tab>
+    <app-tab link="/orders" title="{{'customer.orders' | translate}}"></app-tab>
   </app-tabs>
+</div>
+<div class="d-flex align-items-center">
+  <div class="mr-2">{{ 'header.menu.changelanguage' | translate }}</div>
+  <button class="btn btn-link" (click)="useLanguage('en')">{{ 'header.menu.english' | translate }}</button>
+  <button class="btn btn-link" (click)="useLanguage('fr')">{{ 'header.menu.french' | translate }}</button>
 </div>

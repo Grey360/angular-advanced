@@ -6,6 +6,5 @@ import { Directive, Input } from '@angular/core';
 export class TabDirective {
   @Input() title: string;
   @Input() link: string;
-  constructor() { }
-
+  constructor( ) { }
 }

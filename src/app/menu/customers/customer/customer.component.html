@@ -1,11 +1,14 @@
 <app-card>
   <div class="title d-flex">
     <i class="mr-2 material-icons">assignment_ind</i>
-    <div #customerName>{{ customer.name }}</div>
+    <div #customerName>{{ 'customer.name' | translate: {name: customer.name } }}</div>
   </div>
   <div class="content">
     <div>{{ customer.email }}</div>
     <div>{{ customer.address.street }}</div>
     <div>{{ customer.address.city }} - {{ customer.address.street }}</div>
+    <app-tabs>
+      <app-tab link="/edit/{{ +customer.id }}" title="{{ 'edit' | translate }}"></app-tab>
+    </app-tabs>
   </div>
 </app-card>

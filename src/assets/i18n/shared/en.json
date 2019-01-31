@@ -1,0 +1,25 @@
+{
+  "home": {
+    "welcome": "Welcome"
+  },
+  "edit": "Edit",
+  "modify": "Modify",
+  "name": "Name",
+  "address": "Address",
+  "city": "City",
+  "customer": {
+    "name": "Hello {{ name }}",
+    "CRM": "CRM",
+    "customers": "Customers",
+    "orders": "Orders",
+    "email": "Email",
+    "address": "Address"
+  },
+  "header": {
+    "menu": {
+      "changelanguage": "Change language",
+      "english": "English",
+      "french": "French"
+    }
+  }
+}

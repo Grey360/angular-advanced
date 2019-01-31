@@ -11,7 +11,7 @@ import { CustomerComponent } from './customer/customer.component';
 })
 export class CustomersComponent implements OnInit {
 
-  private customersList: Customer[];
+  customersList: Customer[];
   @ViewChild(CustomerComponent) customer: CustomerComponent;
 
   constructor(
@@ -26,6 +26,13 @@ export class CustomersComponent implements OnInit {
     this.customerService.getAllCustomers().subscribe(
       customers => {
         this.customersList = customers.body;
+        if (this.customersList[0]) {
+          this.customersList[0].isVip = true;
+        }
+
+        if (this.customersList[3]) {
+          this.customersList[3].isVip = true;
+        }
         const address = new Address(
           '240, rue Montels Eglise',
           'Suite royale',
@@ -44,7 +51,6 @@ export class CustomersComponent implements OnInit {
           'gailor.co.uk'
         );
         this.customersList.push(me);
-        console.log(customers);
       }
     );
   }
