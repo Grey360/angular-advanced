@@ -19,6 +19,7 @@ import { InterceptorService } from './interceptor/interceptor.service';
     CommonModule
   ],
   providers: [
+    FakeCustomerService,
     {
       provide: BACKEND_URL, useValue: CUSTOMERS_URL
     },
